@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj": {}
+    "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj": {}
   },
   "projects": {
-    "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj": {
+    "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj",
+        "projectUniqueName": "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj",
         "projectName": "VarolaPesaCli",
-        "projectPath": "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/obj/",
+        "projectPath": "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj",
+        "packagesPath": "C:\\Users\\ericv\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ericv\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,12 +38,16 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "ESCPOS_NET": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "System.IO.Ports": {
               "target": "Package",
               "version": "[9.0.8, )"
@@ -64,18 +68,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.5, 9.0.5]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.106/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

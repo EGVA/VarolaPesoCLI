@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="ESCPOS_NET" Version="3.0.0" />
       <PackageReference Include="System.IO.Ports" Version="9.0.8" />
       <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
     </ItemGroup>

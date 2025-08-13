@@ -59,15 +59,16 @@ public static class RenderUtils
     public static void RenderWeight(UranoIoHandler uranoIoHandler)
     {
         Weight? weight = uranoIoHandler.ParseLastResultNumbers();
-        if(weight != null)
+        if (weight != null)
         {
-            
-            //Console.Clear();
+
+            Console.Clear();
+            Console.WriteLine("Aperte ESC para voltar");
             Console.WriteLine("Leitura da Balanca: ");
             Console.WriteLine($"Peso: {weight.WeightValue:N2}kg");
-            Console.WriteLine($"Tara: {weight.Tara:N2}kg");
+            Console.WriteLine($"Total: {weight.Total:N2}R$");
             Console.WriteLine($"Preco: {weight.Price:N2}R$");
-            //Console.WriteLine($"{uranoIoHandler.SameResultCount}");
+            Console.WriteLine($"{uranoIoHandler.SameResultCount}");
             DrawSeparator();
         }
     }
