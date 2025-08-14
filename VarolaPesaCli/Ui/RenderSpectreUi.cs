@@ -1,4 +1,5 @@
 using Spectre.Console;
+using Spectre.Console.Extensions;
 using VarolaPesaCli.Domain;
 using VarolaPesaCli.Models;
 
@@ -46,7 +47,6 @@ public sealed class RenderSpectreUi
     public void ShowWelcomeScreen()
     {
         AnsiConsole.Clear();
-        Random random = new Random();
         GuiLayout["Root"].Update(
             new Panel(
                     Align.Center(
@@ -58,11 +58,11 @@ public sealed class RenderSpectreUi
         ShowPrinterOptions();
     }
 
-    public string ShowPrinterOptions()
+    private string ShowPrinterOptions()
     {
         while (true)
         {
-            var ports = nUranoIoHandler.GetAllPorts();
+            var ports = NUranoIoHandler.GetAllPorts();
             if (ports.Length == 0)
             {
                 AnsiConsole.Clear();
@@ -84,7 +84,7 @@ public sealed class RenderSpectreUi
                         .Title("Escolha uma das portas:")
                         .PageSize(ports.Length)
                         .AddChoices(ports));
-                nUranoIoHandler.Instance.serialPortName = selectedPort;
+                NUranoIoHandler.Instance.SerialPortName = selectedPort;
                 return selectedPort;
             }
         }
@@ -99,6 +99,29 @@ public sealed class RenderSpectreUi
                         new Markup($"Peso:{weight.WeightValue}\nTara:{weight.Tara}\nValor:{weight.Price}/kg\nTotal:{weight.Total}"),
                         VerticalAlignment.Middle))
                 .Expand());
+        AnsiConsole.Write(GuiLayout);
+    }
+    
+    public void HandleWeightUpdate(object sender, EventArgs args)
+    {
+        if(NUranoIoHandler.Instance.GetWeight() != null)
+        {
+            UpdateWeightValues(NUranoIoHandler.Instance.GetWeight()!);
+        }
+    }
+
+    public void ShowException(Exception e)
+    {
+        var grid = new Grid();
+        grid.AddColumn();
+
+        grid.AddRow($"Exception: {e.Message}");
+        grid.AddRow($"Stack Trace: {e.StackTrace}");
+        grid.AddRow($"Source: {e.Source}");
+        
+        GuiLayout["Root"].Update(
+            new Panel(Align.Center(grid).VerticalAlignment(VerticalAlignment.Middle)
+            ).Expand());
         AnsiConsole.Write(GuiLayout);
     }
 }
