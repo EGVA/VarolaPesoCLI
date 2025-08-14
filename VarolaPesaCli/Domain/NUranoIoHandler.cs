@@ -55,25 +55,27 @@ public class NUranoIoHandler
     
     private static Weight ParseWeight(string readString)
     {
-        var myRegex = MyRegex.GetNumberRegex();
-        var matches = myRegex.Match(readString);
+        const string pattern = @"\d+(\,\d+)?";
+        MatchCollection matches = Regex.Matches(readString!, pattern);
+        if (matches.Count <= 3) return null;
         
         decimal weight = 0;
         decimal price = 0;
         decimal total = 0;
         decimal tara = 0;
-        
-        if (matches.Success)
-        {
-            // Use explicit variables for each parsed value
-            if (decimal.TryParse(matches.Groups[0].Value, out tara) &&
-                decimal.TryParse(matches.Groups[2].Value, out weight) &&
-                decimal.TryParse(matches.Groups[3].Value, out price) &&
-                decimal.TryParse(matches.Groups[5].Value, out total)) {
-              
-        }
-        
-        }
+
+        // for (int i = 0; i < matches.Count; i++)
+        // {
+        //     Console.WriteLine(matches[i].Value + " - " + i);
+        // }
+        // Console.ReadKey();
+
+        // Use explicit variables for each parsed valu
+        //decimal.TryParse(matches[0].Value, out tara);
+        decimal.TryParse(matches[2].Value, out weight);
+        decimal.TryParse(matches[3].Value, out price) ;
+        decimal.TryParse(matches[5].Value, out total);
+
         var result = new Weight(weight, price, total, tara);
         return result;
     }
@@ -123,7 +125,7 @@ public class NUranoIoHandler
     private static void DataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e)
     {
         var sp = (SerialPort)sender;
-
+        Thread.Sleep(100);
         try
         {
             Instance.SetWeight(sp.ReadExisting());

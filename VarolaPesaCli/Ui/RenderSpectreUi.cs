@@ -78,7 +78,7 @@ public sealed class RenderSpectreUi
                 var selectedPort = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("Escolha uma das portas:")
-                        .PageSize(ports.Length)
+                        .PageSize(10)
                         .AddChoices(ports));
                 NUranoIoHandler.Instance.SerialPortName = selectedPort;
                 return selectedPort;
@@ -92,7 +92,7 @@ public sealed class RenderSpectreUi
         GuiLayout["Root"].Update(
             new Panel(
                     Align.Center(
-                        new Markup($"Peso:{weight.WeightValue}\nTara:{weight.Tara}\nValor:{weight.Price}/kg\nTotal:{weight.Total}"),
+                        new Markup($"Peso: {weight.WeightValue.ToString("N3")} /Kg\nValor: {weight.Price.ToString("N2")} R$/Kg\nTotal: {weight.Total.ToString("N2")} R$"),
                         VerticalAlignment.Middle))
                 .Expand());
         AnsiConsole.Write(GuiLayout);
@@ -114,10 +114,11 @@ public sealed class RenderSpectreUi
         grid.AddRow($"Exception: {e.Message}");
         grid.AddRow($"Stack Trace: {e.StackTrace}");
         grid.AddRow($"Source: {e.Source}");
-        
+
         GuiLayout["Root"].Update(
             new Panel(Align.Center(grid).VerticalAlignment(VerticalAlignment.Middle)
             ).Expand());
         AnsiConsole.Write(GuiLayout);
+        Console.ReadKey();
     }
 }

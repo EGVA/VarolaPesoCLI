@@ -2787,19 +2787,19 @@
     ]
   },
   "packageFolders": {
-    "/home/egva/.nuget/packages/": {}
+    "C:\\Users\\ericv\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj",
+      "projectUniqueName": "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj",
       "projectName": "VarolaPesaCli",
-      "projectPath": "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj",
-      "packagesPath": "/home/egva/.nuget/packages/",
-      "outputPath": "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/obj/",
+      "projectPath": "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj",
+      "packagesPath": "C:\\Users\\ericv\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/egva/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ericv\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -2823,7 +2823,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -2861,18 +2861,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[9.0.5, 9.0.5]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.106/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
