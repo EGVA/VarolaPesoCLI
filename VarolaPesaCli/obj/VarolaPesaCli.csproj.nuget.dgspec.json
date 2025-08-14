@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj": {}
+    "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj": {
+    "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj",
+        "projectUniqueName": "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj",
         "projectName": "VarolaPesaCli",
-        "projectPath": "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\VarolaPesaCli.csproj",
-        "packagesPath": "C:\\Users\\ericv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ericv\\OneDrive\\Documentos\\GitHub\\VarolaPesoCLI\\VarolaPesaCli\\obj\\",
+        "projectPath": "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/VarolaPesaCli.csproj",
+        "packagesPath": "/home/egva/.nuget/packages/",
+        "outputPath": "/home/egva/RiderProjects/VarolaPesaCli/VarolaPesaCli/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ericv\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/egva/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -47,6 +47,14 @@
             "ESCPOS_NET": {
               "target": "Package",
               "version": "[3.0.0, )"
+            },
+            "Spectre.Console": {
+              "target": "Package",
+              "version": "[0.50.0, )"
+            },
+            "Spectre.Console.Cli": {
+              "target": "Package",
+              "version": "[0.50.0, )"
             },
             "System.IO.Ports": {
               "target": "Package",
@@ -68,12 +76,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.5, 9.0.5]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.106/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

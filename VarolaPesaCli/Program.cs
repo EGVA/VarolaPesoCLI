@@ -9,17 +9,17 @@ namespace VarolaPesaCli
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(PrintHandler.BarcodeNumber(new Weight(0.5m, 0, 0, 0)));
-            Console.ReadKey();
-            while (true)
-            {
-                Console.Clear();
-                UranoIoHandler ioHandler = new UranoIoHandler();
-                string portName = RenderUtils.PortOptions(ioHandler);
-
-                ioHandler.OpenPort(portName);
-                ioHandler.RequestScale();
-            }
+            // Console.WriteLine(PrintHandler.BarcodeNumber(new Weight(0.5m, 0, 0, 0)));
+            // Console.ReadKey();
+            // while (true)
+            // {
+            //     Console.Clear();
+            //     UranoIoHandler ioHandler = new UranoIoHandler();
+            //     string portName = RenderUtils.PortOptions(ioHandler);
+            //
+            //     ioHandler.OpenPort(portName);
+            //     ioHandler.RequestScale();
+            // }
         }
     }
 }
