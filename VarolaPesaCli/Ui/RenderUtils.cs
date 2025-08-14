@@ -11,7 +11,7 @@ public static class RenderUtils
 
         while (ports.Length == 0)
         {
-            ports = uranoIoHandler.GetAllPorts();
+            ports = UranoIoHandler.GetAllPorts();
             if (ports.Length == 0)
             {
                 Console.WriteLine("Nenhuma porta serial detectada, verifique os dispositivos e tente novamente.");

@@ -11,14 +11,12 @@ namespace VarolaPesaCli
     {
         public static void Main(string[] args)
         {
-            RenderSpectreUi uiInstace = RenderSpectreUi.Instance;
-            uiInstace.Setup();
+            var uiInstance = RenderSpectreUi.Instance;
+            var uranoInstance = nUranoIoHandler.Instance;
+            uiInstance.Setup();
+            uiInstance.ShowWelcomeScreen();
+            uiInstance.UpdateWeightValues(uranoInstance.GetWeight());
             
-            while (true)
-            {
-                uiInstace.UpdateWeightValues();
-                Thread.Sleep(500);
-            }
             // Console.WriteLine(PrintHandler.BarcodeNumber(new Weight(0.5m, 0, 0, 0)));
             // Console.ReadKey();
             // while (true)

@@ -22,7 +22,7 @@ public class UranoIoHandler
     private decimal lastPrintedWeight = 0;
     private bool receivedData = false;
 
-    public string[] GetAllPorts()
+    public static string[] GetAllPorts()
     {
         return SerialPort.GetPortNames();
     }
