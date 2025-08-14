@@ -1,9 +1,5 @@
-﻿using ESCPOS_NET;
-using VarolaPesaCli.Domain;
-using VarolaPesaCli.Models;
+﻿using VarolaPesaCli.Domain;
 using VarolaPesaCli.Ui;
-using Spectre.Console;
-using Spectre.Console.Cli;
 
 namespace VarolaPesaCli
 {
@@ -11,6 +7,7 @@ namespace VarolaPesaCli
     {
         public static void Main(string[] args)
         {
+            var stopLoop = false;
             var uiInstance = RenderSpectreUi.Instance;
             var uranoInstance = NUranoIoHandler.Instance;
             var notifierInstance = ClassesNotifier.Instance;
@@ -21,10 +18,18 @@ namespace VarolaPesaCli
             // Try to open port connection
             uranoInstance.OpenPort();
 
-            while (true)
+            while (!stopLoop)
             {
+                if (Console.KeyAvailable)
+                {
+                    var keyInfo = Console.ReadKey();
+                    if (keyInfo.Key == ConsoleKey.Escape)
+                        stopLoop = true;
+                }
+                
                 // Request output from scale
                 uranoInstance.SendIoRequest();
+                Thread.Sleep(100);
             }
             
             // Console.WriteLine(PrintHandler.BarcodeNumber(new Weight(0.5m, 0, 0, 0)));

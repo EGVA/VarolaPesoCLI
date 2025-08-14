@@ -21,10 +21,6 @@ public class NUranoIoHandler
     {
     }
 
-    private NUranoIoHandler()
-    {
-    }
-
     public static NUranoIoHandler Instance
     {
         get { return instance; }
@@ -46,9 +42,9 @@ public class NUranoIoHandler
         return SerialPort.GetPortNames();
     }
     
-    public Weight? GetWeight()
+    public Weight GetWeight()
     {
-        return _lastScaleResult;
+        return _lastScaleResult ?? new Weight(0, 0, 0, 0);
     }
 
     private void SetWeight(string readString)

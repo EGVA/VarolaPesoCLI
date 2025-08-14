@@ -13,10 +13,6 @@ public sealed class RenderSpectreUi
     {
     }
 
-    private RenderSpectreUi()
-    {
-    }
-
     public static RenderSpectreUi Instance
     {
         get { return instance; }

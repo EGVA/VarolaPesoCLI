@@ -1,3 +1,5 @@
+using VarolaPesaCli.Ui;
+
 namespace VarolaPesaCli.Domain;
 
 public class ClassesNotifier
@@ -21,6 +23,6 @@ public class ClassesNotifier
 
     public void OnScaleOutput()
     {
-        
+        RenderSpectreUi.Instance.UpdateWeightValues(NUranoIoHandler.Instance.GetWeight());
     }
 }
