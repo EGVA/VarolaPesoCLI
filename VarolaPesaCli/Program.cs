@@ -3,35 +3,52 @@ using VarolaPesaCli.Ui;
 
 namespace VarolaPesaCli
 {
+
     public static class Program
     {
+        const int timeToReadScale = 1000;
+
         public static void Main(string[] args)
         {
-            var stopLoop = false;
+            bool stopLoop = false;
             var uiInstance = RenderSpectreUi.Instance;
             var uranoInstance = NUranoIoHandler.Instance;
             var notifierInstance = ClassesNotifier.Instance;
-            // Setups the terminal layout.
-            uiInstance.Setup();
-            // Show io ports options, and set portname to nUranoIoHandler
-            uiInstance.ShowWelcomeScreen();
-            // Try to open port connection
-            uranoInstance.OpenPort();
-
-            while (!stopLoop)
+            while (true)
             {
-                if (Console.KeyAvailable)
+                // Setups the terminal layout.
+                uiInstance.Setup();
+                // Show io ports options, and set portname to nUranoIoHandler
+                uiInstance.ShowWelcomeScreen();
+                // Try to open port connection
+                uranoInstance.OpenPort();
+
+                while (!stopLoop)
                 {
-                    var keyInfo = Console.ReadKey();
-                    if (keyInfo.Key == ConsoleKey.Escape)
+                    if (Console.KeyAvailable)
+                    {
+                        var keyInfo = Console.ReadKey();
+                        if (keyInfo.Key == ConsoleKey.Escape)
+                            stopLoop = true;
+
+                        uranoInstance.ClosePort();
+                        break;
+                    }
+
+                    // Request output from scale
+                    try
+                    {
+                        uranoInstance.SendIoRequest();
+                    }
+                    catch (Exception e)
+                    {
+                        uranoInstance.ClosePort();
                         stopLoop = true;
+                    }
+                    Thread.Sleep(timeToReadScale);
                 }
-                
-                // Request output from scale
-                uranoInstance.SendIoRequest();
-                Thread.Sleep(100);
             }
-            
+
             // Console.WriteLine(PrintHandler.BarcodeNumber(new Weight(0.5m, 0, 0, 0)));
             // Console.ReadKey();
             // while (true)

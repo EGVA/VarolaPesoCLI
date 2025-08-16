@@ -40,7 +40,7 @@ public static class PrintHandler
             e.SetBarcodeHeightInDots(360),
             e.SetBarWidth(BarWidth.Default),
             e.SetBarLabelPosition(BarLabelPrintPosition.None),
-            e.PrintBarcode(BarcodeType.CODE128, BarcodeNumber(weight)),
+            e.PrintBarcode(BarcodeType.CODE128, GenerateBarcode(weight)),
             e.PrintLine(""),
             e.PrintLine(""),
 
@@ -49,35 +49,33 @@ public static class PrintHandler
         );
     }
 
-    // Define a callback method.
-    static void StatusChanged(object sender, EventArgs ps)
-    {
-        var status = (PrinterStatusEventArgs)ps;
-        Console.WriteLine($"Status: {status.IsPrinterOnline}");
-        Console.WriteLine($"Has Paper? {status.IsPaperOut}");
-        Console.WriteLine($"Paper Running Low? {status.IsPaperLow}");
-        Console.WriteLine($"Cash Drawer Open? {status.IsCashDrawerOpen}");
-        Console.WriteLine($"Cover Open? {status.IsCoverOpen}");
-    }
-
-    public static string BarcodeNumber(Weight weight)
+    // c = product code p = product units  d = verification number 
+    // 2 + cccccc + ppppp + d
+    public static string GenerateBarcode(Weight weight)
     {
         string result = "";
-        result += "2111111";
-        decimal value = Math.Round(weight.WeightValue * 46, 2);
-        string valueString = value.ToString("F2");
-        string fixPlacesValueString = "";
-        string noVirgulaString = valueString.Replace(",", "");
-        int lenght = noVirgulaString.Length;
+        // PDV code for the product. First 2 indicates that EAN13 code represents a variable unit product
+        const string productCode = "2" + "111111";
+
+        // Round price value 2 floors
+        decimal roundedProductPrice = Math.Round(weight.WeightValue * 46, 2);
+        // Convert to string and force to keep 2 decimal floors
+        string productPriceString = roundedProductPrice.ToString("F2");
+        // Removes comma to keep EA13 pattern
+        productPriceString = productPriceString.Replace(",", "");
+
+        result += productCode;
+        int lenght = productPriceString.Length;
         if (lenght < 5)
         {
             for (int i = 0; i < 5 - lenght; i++)
             {
-                fixPlacesValueString += "0";
+                result += 0;
             }
         }
-        fixPlacesValueString += noVirgulaString;
-        result += fixPlacesValueString;
+        result += productPriceString;
+
+
         int odd = 0;
         int even = 0;
         bool isOdd = true;

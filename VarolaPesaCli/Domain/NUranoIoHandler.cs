@@ -36,6 +36,7 @@ public class NUranoIoHandler
     private SerialPort _serialPort;
     // Last weight output reported from scale.
     private Weight? _lastScaleResult = null;
+    public bool alreadyPrinted = false;
         
     public static string[] GetAllPorts()
     {
@@ -47,9 +48,20 @@ public class NUranoIoHandler
         return _lastScaleResult ?? new Weight(0, 0, 0, 0);
     }
 
+    public void ClosePort()
+    {
+        _serialPort.Close();
+    }
+
     private void SetWeight(string readString)
     {
-        _lastScaleResult = ParseWeight(readString);
+        Weight newWeight = ParseWeight(readString);
+
+        if (_lastScaleResult != null && newWeight.WeightValue == _lastScaleResult!.WeightValue)
+            alreadyPrinted = true;
+        else
+            alreadyPrinted = false;
+
         ClassesNotifier.Instance.OnScaleOutput();
     }
     
