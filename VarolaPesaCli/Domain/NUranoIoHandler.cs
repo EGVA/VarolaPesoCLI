@@ -26,24 +26,29 @@ public class NUranoIoHandler
     {
         get { return instance; }
     }
-    
+
     #endregion Singleton
-    
+
     // Request parameter specified on Urano scale manual.
     private static readonly byte[] RequestByte = [0x04];
-    
+
     public string SerialPortName = "";
-    
+
     private SerialPort _serialPort;
     // Last weight output reported from scale.
     private Weight? _lastScaleResult = null;
+    private Weight? _lastPrintedResult = null;
+    public int inSequenceSameWeightQtt = 0;
+    public const int sequenceToPrint = 1;
+
+    // Confirm if the actual measure is a repeated measure.
     public bool alreadyPrinted = false;
-        
+
     public static string[] GetAllPorts()
     {
         return SerialPort.GetPortNames();
     }
-    
+
     public Weight GetWeight()
     {
         return _lastScaleResult ?? new Weight(0, 0, 0, 0);
@@ -56,15 +61,17 @@ public class NUranoIoHandler
 
     private void SetWeight(string readString)
     {
-        Console.WriteLine(readString);
+        //Console.WriteLine(readString);
         Weight newWeight = ParseWeight(readString);
+        if (_lastScaleResult != null && newWeight != null && newWeight.WeightValue == _lastScaleResult!.WeightValue)
+        {
+            inSequenceSameWeightQtt++;
+        }
+        else{
+            inSequenceSameWeightQtt = 0;
+        }
         _lastScaleResult = newWeight;
-        Console.WriteLine(newWeight.WeightValue);
-
-        if (_lastScaleResult != null && newWeight.WeightValue == _lastScaleResult!.WeightValue)
-             alreadyPrinted = true;
-         else
-             alreadyPrinted = false;
+        //Console.WriteLine(newWeight.WeightValue);
 
         ClassesNotifier.Instance.OnScaleOutput();
     }
@@ -151,7 +158,6 @@ public class NUranoIoHandler
         catch (Exception e)
         {
             RenderSpectreUi.Instance.ShowException(e);
-            throw;
         }
         finally
         {
@@ -168,7 +174,6 @@ public class NUranoIoHandler
         catch (Exception e)
         {
             RenderSpectreUi.Instance.ShowException(e);
-            throw;
         }
     }
 
@@ -183,7 +188,32 @@ public class NUranoIoHandler
         catch (Exception exception)
         {
             RenderSpectreUi.Instance.ShowException(exception);
-            throw;
         }
+    }
+
+    public bool CanPrint()
+    {
+        if (_lastPrintedResult == null)
+        {
+            _lastPrintedResult = _lastScaleResult;
+            return true;
+        }
+        if (_lastScaleResult != null)
+        {
+            if (_lastScaleResult.WeightValue == 0)
+            {
+                return false;
+            }
+            if (_lastScaleResult.WeightValue == _lastPrintedResult.WeightValue)
+            {
+                return false;
+            }
+        }
+        if (inSequenceSameWeightQtt > sequenceToPrint)
+        {
+            _lastPrintedResult = _lastScaleResult;
+            return true;
+        }
+        else return false;
     }
 }

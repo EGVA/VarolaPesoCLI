@@ -43,3 +43,15 @@ C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\obj\Releas
 C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\obj\Release\net9.0\VarolaPesaCli.pdb
 C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\obj\Release\net9.0\VarolaPesaCli.genruntimeconfig.cache
 C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\obj\Release\net9.0\ref\VarolaPesaCli.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\Spectre.Console.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\Spectre.Console.Cli.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\de\Spectre.Console.Cli.resources.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\es\Spectre.Console.Cli.resources.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\fr\Spectre.Console.Cli.resources.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\it\Spectre.Console.Cli.resources.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\ja\Spectre.Console.Cli.resources.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\ko\Spectre.Console.Cli.resources.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\pt\Spectre.Console.Cli.resources.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\ru\Spectre.Console.Cli.resources.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\sv\Spectre.Console.Cli.resources.dll
+C:\Users\ericv\OneDrive\Documentos\GitHub\VarolaPesoCLI\VarolaPesaCli\bin\Release\net9.0\zh-Hans\Spectre.Console.Cli.resources.dll

@@ -3,6 +3,7 @@ using ESCPOS_NET;
 using ESCPOS_NET.Emitters;
 using ESCPOS_NET.Utilities;
 using VarolaPesaCli.Models;
+using VarolaPesaCli.Ui;
 
 namespace VarolaPesaCli.Domain;
 
@@ -21,32 +22,70 @@ public static class PrintHandler
     public static async void PrintWeight(Weight weight, ImmediateNetworkPrinter immediateNetworkPrinter)
     {
         var e = new EPSON();
-        await immediateNetworkPrinter.WriteAsync( // or, if using and immediate printer, use await printer.WriteAsync
-        ByteSplicer.Combine(
-            e.CenterAlign(),
-            e.PrintLine(""),
-            e.PrintLine(""),
-            e.SetStyles(PrintStyle.DoubleHeight | PrintStyle.DoubleWidth),
-            e.PrintLine("Varola"),
-            e.PrintLine(""),
-            e.PrintLine(""),
+        try
+        {
+            await immediateNetworkPrinter.WriteAsync( // or, if using and immediate printer, use await printer.WriteAsync
+            ByteSplicer.Combine(
+                e.CenterAlign(),
+                e.PrintLine(""),
+                e.PrintLine(""),
+                e.SetStyles(PrintStyle.DoubleHeight | PrintStyle.DoubleWidth),
+                e.PrintLine("Varola"),
+                e.PrintLine(""),
+                e.PrintLine(""),
 
-            e.PrintLine(""),
-            e.PrintLine($"Peso: {weight.WeightValue:N2}Kg"),
-            e.PrintLine($"Total: {weight.WeightValue * 46:N2}R$"),
-            e.PrintLine(""),
-            e.PrintLine(""),
+                e.PrintLine(""),
+                e.PrintLine($"Peso: {weight.WeightValue:N2}Kg"),
+                e.PrintLine($"Total: {weight.WeightValue * 46:N2}R$"),
+                e.PrintLine(""),
+                e.PrintLine(""),
 
-            e.SetBarcodeHeightInDots(360),
-            e.SetBarWidth(BarWidth.Default),
-            e.SetBarLabelPosition(BarLabelPrintPosition.None),
-            e.PrintBarcode(BarcodeType.CODE128, GenerateBarcode(weight)),
-            e.PrintLine(""),
-            e.PrintLine(""),
+                e.SetBarcodeHeightInDots(360),
+                e.SetBarWidth(BarWidth.Default),
+                e.SetBarLabelPosition(BarLabelPrintPosition.None),
+                e.PrintBarcode(BarcodeType.CODE128, GenerateBarcode(weight)),
+                e.PrintLine(""),
+                e.PrintLine(""),
 
-            e.FullCut()
-        )
-        );
+                e.FullCut()
+            )
+            );
+        }
+        catch (Exception ex)
+        {
+            RenderSpectreUi.Instance.ShowException(ex);
+        }
+    }
+    public static void PrintUSB(Weight weight)
+    {
+        var printer = new SerialPrinter(portName: "COM7", baudRate: 115200);
+        var e = new EPSON();
+                printer.Write( // or, if using and immediate printer, use await printer.WriteAsync
+                ByteSplicer.Combine(
+                    e.CenterAlign(),
+                    e.PrintLine(""),
+                    e.PrintLine(""),
+                    e.SetStyles(PrintStyle.DoubleHeight | PrintStyle.DoubleWidth),
+                    e.PrintLine("Varola"),
+                    e.PrintLine(""),
+                    e.PrintLine(""),
+
+                    e.PrintLine(""),
+                    e.PrintLine($"Peso: {weight.WeightValue:N2}Kg"),
+                    e.PrintLine($"Total: {weight.WeightValue * 46:N2}R$"),
+                    e.PrintLine(""),
+                    e.PrintLine(""),
+
+                    e.SetBarcodeHeightInDots(360),
+                    e.SetBarWidth(BarWidth.Default),
+                    e.SetBarLabelPosition(BarLabelPrintPosition.None),
+                    e.PrintBarcode(BarcodeType.CODE128, GenerateBarcode(weight)),
+                    e.PrintLine(""),
+                    e.PrintLine(""),
+
+                    e.FullCut()
+                )
+                );
     }
 
     // c = product code p = product units  d = verification number 
