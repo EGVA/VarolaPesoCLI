@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.IO.Ports;
 using System.Text.RegularExpressions;
 using VarolaPesaCli.Models;
@@ -55,40 +56,77 @@ public class NUranoIoHandler
 
     private void SetWeight(string readString)
     {
+        Console.WriteLine(readString);
         Weight newWeight = ParseWeight(readString);
+        _lastScaleResult = newWeight;
+        Console.WriteLine(newWeight.WeightValue);
 
         if (_lastScaleResult != null && newWeight.WeightValue == _lastScaleResult!.WeightValue)
-            alreadyPrinted = true;
-        else
-            alreadyPrinted = false;
+             alreadyPrinted = true;
+         else
+             alreadyPrinted = false;
 
         ClassesNotifier.Instance.OnScaleOutput();
     }
-    
+
+    // private static Weight ParseWeight(string readString)
+    // {
+    //     const string pattern = @"\d+(\,\d+)?";
+    //     MatchCollection matches = Regex.Matches(readString!, pattern);
+    //     if (matches.Count <= 3) return null;
+
+    //     decimal weight = 0;
+    //     decimal price = 0;
+    //     decimal total = 0;
+    //     decimal tara = 0;
+
+    //     // for (int i = 0; i < matches.Count; i++)
+    //     // {
+    //     //     Console.WriteLine(matches[i].Value + " - " + i);
+    //     // }
+    //     // Console.ReadKey();
+
+    //     // Use explicit variables for each parsed valu
+    //     //decimal.TryParse(matches[0].Value, out tara);
+    //     decimal.TryParse(matches[2].Value, out weight);
+    //     decimal.TryParse(matches[3].Value, out price) ;
+    //     decimal.TryParse(matches[5].Value, out total);
+
+    //     var result = new Weight(weight, price, total, tara);
+    //     return result;
+    // }
+
     private static Weight ParseWeight(string readString)
     {
-        const string pattern = @"\d+(\,\d+)?";
+        // Console.WriteLine(readString);
+        const string pattern = @"[\d.,]+";
         MatchCollection matches = Regex.Matches(readString!, pattern);
+        // Check if it only read the date number.
         if (matches.Count <= 3) return null;
-        
         decimal weight = 0;
         decimal price = 0;
         decimal total = 0;
         decimal tara = 0;
+        try
+        {
+            decimal.TryParse(matches[7].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out tara);
+            decimal.TryParse(matches[8].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out weight);
+            decimal.TryParse(matches[9].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out price);
+            decimal.TryParse(matches[10].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out total);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"{matches.Count}");
+            Console.WriteLine($"Erro ao tentar converter resultado da balanca em objeto. {e} ");
+            return null;
+        }
 
         // for (int i = 0; i < matches.Count; i++)
         // {
-        //     Console.WriteLine(matches[i].Value + " - " + i);
+        //     Console.WriteLine($"{i} - {matches[i].Value}");
         // }
-        // Console.ReadKey();
 
-        // Use explicit variables for each parsed valu
-        //decimal.TryParse(matches[0].Value, out tara);
-        decimal.TryParse(matches[2].Value, out weight);
-        decimal.TryParse(matches[3].Value, out price) ;
-        decimal.TryParse(matches[5].Value, out total);
-
-        var result = new Weight(weight, price, total, tara);
+        Weight result = new(weight, price, total, tara);
         return result;
     }
 
@@ -137,7 +175,7 @@ public class NUranoIoHandler
     private static void DataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e)
     {
         var sp = (SerialPort)sender;
-        Thread.Sleep(100);
+        Thread.Sleep(200);
         try
         {
             Instance.SetWeight(sp.ReadExisting());

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VarolaPesaCli")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67454d826aa23888d9310ba53f4447a676582be4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8718d26ada8e50423ce77ab706db6e9becd5c65c")]
 [assembly: System.Reflection.AssemblyProductAttribute("VarolaPesaCli")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VarolaPesaCli")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

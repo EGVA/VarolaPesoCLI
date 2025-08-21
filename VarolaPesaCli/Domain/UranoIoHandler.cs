@@ -136,7 +136,7 @@
 //             if (SameResultCount > SameResultCountBeforePrint)
 //             {
 //                 SameResultCount = 0;
-//                 ImmediateNetworkPrinter printer = PrintHandler.ConnectNetworkPrinter("192.168.3.154", 9100, "Caixa");
+//                 ImmediateNetworkPrinter printer = PrintHandler.ConnectNetworkPrinter("192.168.3.145", 9100, "Caixa");
 //                 lastPrintedWeight = _lastResult.WeightValue;
 //                 PrintHandler.PrintWeight(_lastResult, printer);
 //             }

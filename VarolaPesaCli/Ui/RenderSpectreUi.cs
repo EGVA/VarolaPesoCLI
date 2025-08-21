@@ -92,7 +92,7 @@ public sealed class RenderSpectreUi
         GuiLayout["Root"].Update(
             new Panel(
                     Align.Center(
-                        new Markup($"Peso: {weight.WeightValue.ToString("N3")} /Kg\nValor: {weight.Price.ToString("N2")} R$/Kg\nTotal: {weight.Total.ToString("N2")} R$"),
+                        new Markup($"Peso: {weight.WeightValue.ToString("N3")}/kg \n Tara: {weight.Tara.ToString("N3")}/kg\nValor: {weight.Price.ToString("N2")}R$/Kg\nTotal: {weight.Total.ToString("N2")}R$"),
                         VerticalAlignment.Middle))
                 .Expand());
         AnsiConsole.Write(GuiLayout);
