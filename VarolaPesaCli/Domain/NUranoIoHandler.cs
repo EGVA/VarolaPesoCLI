@@ -209,7 +209,7 @@ public class NUranoIoHandler
                 return false;
             }
         }
-        if (inSequenceSameWeightQtt > sequenceToPrint)
+        if (inSequenceSameWeightQtt > sequenceToPrint && _lastScaleResult != null && _lastScaleResult!.WeightValue != 0)
         {
             _lastPrintedResult = _lastScaleResult;
             return true;
