@@ -37,7 +37,7 @@ public class NUranoIoHandler
     private SerialPort _serialPort;
     // Last weight output reported from scale.
     private Weight? _lastScaleResult = null;
-    private Weight? _lastPrintedResult = null;
+    public Weight? LastPrintedResult = null;
     public int inSequenceSameWeightQtt = 0;
     public const int sequenceToPrint = 1;
 
@@ -193,9 +193,9 @@ public class NUranoIoHandler
 
     public bool CanPrint()
     {
-        if (_lastPrintedResult == null)
+        if (LastPrintedResult == null)
         {
-            _lastPrintedResult = _lastScaleResult;
+            LastPrintedResult = _lastScaleResult;
             return true;
         }
         if (_lastScaleResult != null)
@@ -204,14 +204,14 @@ public class NUranoIoHandler
             {
                 return false;
             }
-            if (_lastScaleResult.WeightValue == _lastPrintedResult.WeightValue)
+            if (_lastScaleResult.WeightValue == LastPrintedResult.WeightValue)
             {
                 return false;
             }
         }
         if (inSequenceSameWeightQtt > sequenceToPrint && _lastScaleResult != null && _lastScaleResult!.WeightValue != 0)
         {
-            _lastPrintedResult = _lastScaleResult;
+            LastPrintedResult = _lastScaleResult;
             return true;
         }
         else return false;

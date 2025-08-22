@@ -88,11 +88,23 @@ public sealed class RenderSpectreUi
     
     public void UpdateWeightValues(Weight weight)
     {
+        string LastPrintedString = "";
+        Weight? LastPrintedObj = NUranoIoHandler.Instance.LastPrintedResult;
+        if (LastPrintedObj != null)
+        {
+            LastPrintedString = $"Ultima Impressão - Peso: {weight.WeightValue.ToString("N3")}/kg \n Tara: {weight.Tara.ToString("N3")}/kg\nValor: {weight.Price.ToString("N2")}R$/Kg\nTotal: {weight.Total.ToString("N2")}R$\n{NUranoIoHandler.Instance.inSequenceSameWeightQtt} / {NUranoIoHandler.sequenceToPrint}";
+        }
         AnsiConsole.Clear();
         GuiLayout["Root"].Update(
             new Panel(
                     Align.Center(
-                        new Markup($"Peso: {weight.WeightValue.ToString("N3")}/kg \n Tara: {weight.Tara.ToString("N3")}/kg\nValor: {weight.Price.ToString("N2")}R$/Kg\nTotal: {weight.Total.ToString("N2")}R$\n{NUranoIoHandler.Instance.inSequenceSameWeightQtt} / {NUranoIoHandler.sequenceToPrint}"),
+                        new Markup(
+                            @$"Peso: {weight.WeightValue.ToString("N3")}/kg \n
+                             Tara: {weight.Tara.ToString("N3")}/kg\n
+                             Valor: {weight.Price.ToString("N2")}R$/Kg\n
+                             Total: {weight.Total.ToString("N2")}R$\n
+                             {NUranoIoHandler.Instance.inSequenceSameWeightQtt} / {NUranoIoHandler.sequenceToPrint}\n
+                             {LastPrintedString}"),
                         VerticalAlignment.Middle))
                 .Expand());
         AnsiConsole.Write(GuiLayout);
