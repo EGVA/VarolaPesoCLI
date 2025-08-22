@@ -34,7 +34,7 @@ public class NUranoIoHandler
 
     public string SerialPortName = "";
 
-    private SerialPort _serialPort;
+    private SerialPort? _serialPort;
     // Last weight output reported from scale.
     private Weight? _lastScaleResult = null;
     public Weight? LastPrintedResult = null;
@@ -56,7 +56,8 @@ public class NUranoIoHandler
 
     public void ClosePort()
     {
-        _serialPort.Close();
+        if(_serialPort != null)
+            _serialPort.Close();
     }
 
     private void SetWeight(string readString)
@@ -109,7 +110,7 @@ public class NUranoIoHandler
         const string pattern = @"[\d.,]+";
         MatchCollection matches = Regex.Matches(readString!, pattern);
         // Check if it only read the date number.
-        if (matches.Count <= 3) return null;
+        if (matches.Count <= 3) return new (0,0,0,0);
         decimal weight = 0;
         decimal price = 0;
         decimal total = 0;
@@ -125,7 +126,7 @@ public class NUranoIoHandler
         {
             Console.WriteLine($"{matches.Count}");
             Console.WriteLine($"Erro ao tentar converter resultado da balanca em objeto. {e} ");
-            return null;
+            return new (0,0,0,0);
         }
 
         // for (int i = 0; i < matches.Count; i++)
@@ -166,7 +167,7 @@ public class NUranoIoHandler
     }
     public void SendIoRequest()
     {
-        if (!_serialPort.IsOpen) return;
+        if (_serialPort == null || _serialPort.IsOpen) { return; }
         try
         {
             _serialPort.Write(RequestByte, 0, RequestByte.Length);
