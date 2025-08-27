@@ -126,7 +126,7 @@ public class NUranoIoHandler
         {
             Console.WriteLine($"{matches.Count}");
             Console.WriteLine($"Erro ao tentar converter resultado da balanca em objeto. {e} ");
-            return new (0,0,0,0);
+            throw;
         }
 
         // for (int i = 0; i < matches.Count; i++)
@@ -174,7 +174,7 @@ public class NUranoIoHandler
         }
         catch (Exception e)
         {
-            RenderSpectreUi.Instance.ShowException(e);
+            throw;
         }
     }
 
@@ -188,7 +188,7 @@ public class NUranoIoHandler
         }
         catch (Exception exception)
         {
-            RenderSpectreUi.Instance.ShowException(exception);
+            throw;
         }
     }
 

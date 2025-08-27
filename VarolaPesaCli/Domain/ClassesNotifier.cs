@@ -26,8 +26,9 @@ public class ClassesNotifier
     public void OnScaleOutput()
     {
         Weight weight = NUranoIoHandler.Instance.GetWeight();
-        var printer = PrintHandler.ConnectNetworkPrinter("192.168.3.145", 9100, "Marmita");
-        // var printer = PrintHandler.ConnectNetworkPrinter("127.0.0.1", 9100, "Debug");
+
+        // var printer = PrintHandler.ConnectNetworkPrinter("192.168.3.145", 9100, "Marmita");
+        var printer = PrintHandler.ConnectNetworkPrinter("127.0.0.1", 9100, "Debug");
 
         RenderSpectreUi.Instance.UpdateWeightValues(weight);
         if (NUranoIoHandler.Instance.CanPrint())
@@ -35,5 +36,10 @@ public class ClassesNotifier
             //PrintHandler.PrintUSB(weight);
             PrintHandler.PrintWeight(weight, printer);
         }
+    }
+
+    public void OnExceptionInWeightScreen()
+    {
+
     }
 }

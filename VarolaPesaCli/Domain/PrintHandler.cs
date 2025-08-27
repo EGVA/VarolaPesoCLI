@@ -53,7 +53,7 @@ public static class PrintHandler
         }
         catch (Exception ex)
         {
-            RenderSpectreUi.Instance.ShowException(ex);
+            throw;
         }
     }
     public static void PrintUSB(Weight weight)
